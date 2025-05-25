@@ -1,0 +1,37 @@
+{
+  "script": {
+    "name": "Get-ServiceStatus",
+    "description": "Checks the status of a specified Windows service.",
+    "source_url": "https://raw.githubusercontent.com/your-repo/scripts/main/Get-ServiceStatus.ps1"
+  },
+  "inputs": [
+    {
+      "name": "ServiceName",
+      "label": "Service Name",
+      "type": "string",
+      "required": true,
+      "default": ""
+    },
+    {
+      "name": "VerboseOutput",
+      "label": "Enable Verbose Output",
+      "type": "bool",
+      "required": false,
+      "default": false
+    }
+  ],
+  "output": {
+    "type": "console",
+    "format": "text"
+  },
+  "conditions": {
+    "success": {
+      "keywords": ["Running", "Stopped"],
+      "exit_code": 0
+    },
+    "failure": {
+      "keywords": ["not recognized", "error", "Exception"],
+      "exit_code": [1, -1]
+    }
+  }
+}
