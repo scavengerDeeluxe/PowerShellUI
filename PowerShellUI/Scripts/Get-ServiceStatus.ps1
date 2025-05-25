@@ -1,1 +1,3 @@
-get-services  
+get-process
+$myinvocation
+ls $env:\
