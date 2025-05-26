@@ -1,37 +1,47 @@
 {
-  "script": {
-    "name": "Get-ServiceStatus",
-    "description": "Checks the status of a specified Windows service.",
-    "source_url": "https://raw.githubusercontent.com/your-repo/scripts/main/Get-ServiceStatus.ps1"
-  },
-  "inputs": [
-    {
-      "name": "ServiceName",
-      "label": "Service Name",
-      "type": "string",
-      "required": true,
-      "default": ""
+    "conditions": {
+        "failure": {
+            "exit_code": [
+                1
+            ],
+            "keywords": [
+                "error",
+                "failed"
+            ]
+        },
+        "success": {
+            "exit_code": 0,
+            "keywords": [
+                "deleted successfully",
+                "operation completed"
+            ]
+        }
     },
-    {
-      "name": "VerboseOutput",
-      "label": "Enable Verbose Output",
-      "type": "bool",
-      "required": false,
-      "default": false
-    }
-  ],
-  "output": {
-    "type": "console",
-    "format": "text"
-  },
-  "conditions": {
-    "success": {
-      "keywords": ["Running", "Stopped"],
-      "exit_code": 0
+    "inputs": [
+        {
+            "default": "",
+            "label": "Target Computer",
+            "name": "ComputerName",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "output": {
+        "format": "text",
+        "type": "console"
     },
-    "failure": {
-      "keywords": ["not recognized", "error", "Exception"],
-      "exit_code": [1, -1]
+    "script": {
+        "command": "Get-Service",
+        "description": "Gets remote Services",
+        "maker": {
+            "contact": "josh@gmail.com",
+            "name": "josh dahle"
+        },
+        "name": "Get-RemoteServcie",
+        "rating": 5,
+        "risk": 0,
+        "runs": 55,
+        "ScriptID": 838390,
+        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/master/PowerShellUI/Scripts/Get-ServiceStatus.ps1"
     }
-  }
 }
