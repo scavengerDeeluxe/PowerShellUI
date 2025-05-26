@@ -1,0 +1,47 @@
+{
+    "conditions": {
+        "failure": {
+            "exit_code": [
+                1
+            ],
+            "keywords": [
+                "error",
+                "failed"
+            ]
+        },
+        "success": {
+            "exit_code": 0,
+            "keywords": [
+                "deleted successfully",
+                "operation completed"
+            ]
+        }
+    },
+    "inputs": [
+        {
+            "default": "r32-1991829",
+            "label": "Target Computer",
+            "name": "ComputerName",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "output": {
+        "format": "text",
+        "type": "console"
+    },
+    "script": {
+        "command": "Get-PnpDevice | ForEach { pnputil /delete-device $_.InstanceId }",
+        "description": "Removes phantom devices using pnputil",
+        "maker": {
+            "contact": "josh@gmail.com",
+            "name": "josh dahle"
+        },
+        "name": "Remove-GhostPNPDevices",
+        "rating": 5,
+        "risk": 0,
+        "runs": 55,
+        "ScriptID": 838389,
+        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/master/PowerShellUI/Scripts/Remove-GhostPNPDevices.ps1"
+    }
+}
