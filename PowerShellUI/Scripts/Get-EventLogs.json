@@ -1,0 +1,81 @@
+{
+  "script": {
+    "ScriptID": 10001,
+    "name": "Get-RemoteEventLogs",
+    "description": "Grabs remote computer eventlogs for problem diagnosis",
+    "maker": {
+      "name": "josh dahle",
+      "contact": "josh@gmail.com"
+    },
+    "runs": 55,
+    "rating": 5,
+    "risk": 0,
+    "command": "./Get-RemoteEventLogs.ps1"
+  },
+  "inputs": [
+    {
+      "name": "ComputerName",
+      "label": "Target Computer",
+      "ControlType": "TextBox",
+      "type": "string",
+      "required": true,
+      "default": "r32-1991829"
+    },
+	{
+    "Name": "EventIDs",
+    "Label": "Choose Events To Retrieve",
+    "ControlType": "CheckedListBox";
+    "Type": "Array",
+    "Items": "$eventChoices = @(
+    @{ ID = 4624; Label = "Logon Success" },
+    @{ ID = 4625; Label = "Logon Failure" },
+    @{ ID = 6005; Label = "System Boot" },
+    @{ ID = 6006; Label = "System Shutdown" },
+    @{ ID = 6008; Label = "Unexpected Shutdown" },
+    @{ ID = 1000; Label = "App Error" },
+    @{ ID = 1001; Label = "App Hang" },
+    @{ ID = 7036; Label = "Service Change" },
+    @{ ID = 4104; Label = "PowerShell Script Block" }
+)"
+},
+{
+  "Dates": [
+  {
+    "name": "Time",
+    "label": "Times To Query",
+    "type": "Array",
+    "ControlType": "ComboBox",
+	},
+    "Items": [
+{
+"Selection": "Last X Hours",
+"label": "Last X Hours"
+"ControlType": "TextBox"
+"type": "integer"
+"dependent": "Combobox -eq "Last X Hours"
+},
+{
+"Selection": "On This Date",
+"label": "On This Date",
+"ControlType": "TextBox"
+"type": "Date"
+"dependent": "Combobox -eq "On This Date"
+}
+]	
+)   
+  ]
+ },
+  "output": {
+    "type": "console",
+    "format": "DataGrid"
+  },
+  "conditions": {
+    "success": {
+      "exit_code": 0
+    },
+    "failure": {
+      "keywords": ["error", "failed"],
+      "exit_code": [1]
+    }
+  }
+}
