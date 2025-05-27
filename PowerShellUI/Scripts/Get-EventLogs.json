@@ -1,4 +1,4 @@
-e{
+{
     "conditions": {
         "failure": {
             "exit_code": [
