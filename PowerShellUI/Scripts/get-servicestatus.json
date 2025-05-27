@@ -21,6 +21,8 @@
         {
             "default": "",
             "label": "Target Computer",
+                        "ControlType": "TextBox",
+
             "name": "ComputerName",
             "required": true,
             "type": "string"
