@@ -22,6 +22,7 @@
             "default": "r32-1991829",
             "label": "Target Computer",
             "name": "ComputerName",
+            "ControlType": "TextBox",
             "required": true,
             "type": "string"
         }
