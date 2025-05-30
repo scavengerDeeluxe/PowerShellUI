@@ -27,8 +27,9 @@ function Get-WMIEventsOnDate
 	
 	try
 	{
-		$item = Get-WmiObject -Class Win32_NTLogEvent -ComputerName $ComputerName -Filter $filter -ErrorAction Stop |
-		Select-Object TimeGenerated, EventCode, SourceName, Type, Message
+	$item = get-winevent -computername $computername -filterhashtable {$eventfilter} 
+ #	$item = Get-WmiObject -Class Win32_NTLogEvent -ComputerName $ComputerName -Filter $filter -ErrorAction Stop |
+#		Select-Object TimeGenerated, EventCode, SourceName, Type, Message
 		$results.APpendText($item)
 	}
 	catch
