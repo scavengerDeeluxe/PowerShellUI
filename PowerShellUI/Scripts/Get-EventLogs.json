@@ -23,65 +23,33 @@
             "type": "string"
         },
         {
-            "ControlType": "CheckedListBox",
-            "items": [
-                {
-                    "ID": 4624,
-                    "Label": "Logon Success"
-                },
-                {
-                    "ID": 4625,
-                    "Label": "Logon Failure"
-                },
-                {
-                    "ID": 6005,
-                    "Label": "System Boot"
-                },
-                {
-                    "ID": 6006,
-                    "Label": "System Shutdown"
-                },
-                {
-                    "ID": 6008,
-                    "Label": "Unexpected Shutdown"
-                },
-                {
-                    "ID": 1000,
-                    "Label": "App Error"
-                },
-                {
-                    "ID": 1001,
-                    "Label": "App Hang"
-                },
-                {
-                    "ID": 7036,
-                    "Label": "Service Change"
-                },
-                {
-                    "ID": 4104,
-                    "Label": "PowerShell Script Block"
-                }
-            ],
-            "label": "Choose Events To Retrieve",
-            "name": "EventIDs",
-            "type": "Array"
-        },
+  "name": "EventIDs",
+  "label": "Choose Events To Retrieve",
+  "ControlType": "CheckedListBox",
+  "type": "Array",
+  "items": [
+    "4624 - Logon Success",
+    "4625 - Logon Failure",
+    "6005 - System Boot",
+    "6006 - System Shutdown",
+    "6008 - Unexpected Shutdown",
+    "1000 - App Error",
+    "1001 - App Hang",
+    "7036 - Service Change",
+    "4104 - PowerShell Script Block"
+  ]
+},
         {
-            "ControlType": "ComboBox",
-            "items": [
-                {
-                    "label": "Last X Hours",
-                    "Selection": "Last X Hours"
-                },
-                {
-                    "label": "On This Date",
-                    "Selection": "On This Date"
-                }
-            ],
-            "label": "Select Time Option",
-            "name": "TimeOption"
-        }
-    ],
+  "name": "TimeOption",
+  "label": "Time Range",
+  "ControlType": "ComboBox",
+  "type": "string",
+  "items": [
+    "Last X Hours",
+    "On This Date"
+  ]
+}
+    ]
     "output": {
         "format": "DataGrid",
         "type": "console"
