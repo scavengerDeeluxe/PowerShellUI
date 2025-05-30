@@ -94,7 +94,7 @@
         "type": "console"
     },
     "script": {
-        "command": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-EventLogs.json.ps1",
+        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-EventLogs.json.ps1",
         "description": "Grabs remote computer eventlogs for problem diagnosis",
         "maker": {
             "contact": "josh@gmail.com",
