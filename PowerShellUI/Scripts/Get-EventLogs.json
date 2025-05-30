@@ -70,16 +70,12 @@
             "ControlType": "ComboBox",
             "items": [
                 {
-                    "ControlType": "TextBox",
                     "dependent": "ComboBox -eq 'Last X Hours'",
-                    "label": "Last X Hours",
                     "Selection": "Last X Hours",
                     "type": "integer"
                 },
                 {
-                    "ControlType": "TextBox",
                     "dependent": "ComboBox -eq 'On This Date'",
-                    "label": "On This Date",
                     "Selection": "On This Date",
                     "type": "Date"
                 }
