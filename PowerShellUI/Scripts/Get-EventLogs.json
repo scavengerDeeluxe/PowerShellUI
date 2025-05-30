@@ -70,19 +70,16 @@
             "ControlType": "ComboBox",
             "items": [
                 {
-                    "dependent": "ComboBox -eq 'Last X Hours'",
-                    "Selection": "Last X Hours",
-                    "type": "integer"
+                    "label": "Last X Hours",
+                    "Selection": "Last X Hours"
                 },
                 {
-                    "dependent": "ComboBox -eq 'On This Date'",
-                    "Selection": "On This Date",
-                    "type": "Date"
+                    "label": "On This Date",
+                    "Selection": "On This Date"
                 }
             ],
-            "label": "Times To Query",
-            "name": "Time",
-            "type": "Array"
+            "label": "Select Time Option",
+            "name": "TimeOption"
         }
     ],
     "output": {
@@ -90,7 +87,6 @@
         "type": "console"
     },
     "script": {
-        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-EventLogs.json.ps1",
         "description": "Grabs remote computer eventlogs for problem diagnosis",
         "maker": {
             "contact": "josh@gmail.com",
@@ -100,6 +96,7 @@
         "rating": 5,
         "risk": 0,
         "runs": 55,
-        "ScriptID": 10001
+        "ScriptID": 10001,
+        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-EventLogs.json.ps1"
     }
 }
