@@ -23,33 +23,33 @@
             "type": "string"
         },
         {
-  "name": "EventIDs",
-  "label": "Choose Events To Retrieve",
-  "ControlType": "CheckedListBox",
-  "type": "Array",
-  "items": [
-    "4624 - Logon Success",
-    "4625 - Logon Failure",
-    "6005 - System Boot",
-    "6006 - System Shutdown",
-    "6008 - Unexpected Shutdown",
-    "1000 - App Error",
-    "1001 - App Hang",
-    "7036 - Service Change",
-    "4104 - PowerShell Script Block"
-  ]
-},
+            "ControlType": "CheckedListBox",
+            "items": [
+                "4624 - Logon Success",
+                "4625 - Logon Failure",
+                "6005 - System Boot",
+                "6006 - System Shutdown",
+                "6008 - Unexpected Shutdown",
+                "1000 - App Error",
+                "1001 - App Hang",
+                "7036 - Service Change",
+                "4104 - PowerShell Script Block"
+            ],
+            "label": "Choose Events To Retrieve",
+            "name": "EventIDs",
+            "type": "Array"
+        },
         {
-  "name": "TimeOption",
-  "label": "Time Range",
-  "ControlType": "ComboBox",
-  "type": "string",
-  "items": [
-    "Last X Hours",
-    "On This Date"
-  ]
-}
-    ]
+            "ControlType": "ComboBox",
+            "items": [
+                "Last X Hours",
+                "On This Date"
+            ],
+            "label": "Time Range",
+            "name": "TimeOption",
+            "type": "string"
+        }
+    ],
     "output": {
         "format": "DataGrid",
         "type": "console"
