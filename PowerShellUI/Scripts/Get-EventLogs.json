@@ -39,16 +39,30 @@
             "name": "EventIDs",
             "type": "Array"
         },
-        {
-            "ControlType": "ComboBox",
-            "items": [
-                "Last X Hours",
-                "On This Date"
-            ],
-            "label": "Time Range",
-            "name": "TimeOption",
-            "type": "string"
-        }
+{
+  "name": "TimeOption",
+  "label": "Time Range",
+  "ControlType": "ComboBox",
+  "type": "string",
+  "items": [
+    "Last X Hours",
+    "On This Date"
+  ],
+  "branches": {
+    "Last X Hours": {
+      "name": "LastHours",
+      "label": "Enter Hours Back",
+      "ControlType": "TextBox",
+      "type": "integer"
+    },
+    "On This Date": {
+      "name": "SpecificDate",
+      "label": "Pick Date",
+      "ControlType": "DateTimePicker",
+      "type": "Date"
+    }
+  }
+}
     ],
     "output": {
         "format": "DataGrid",
