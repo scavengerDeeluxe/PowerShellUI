@@ -1,16 +1,10 @@
-$target = $computername.text
-$EventIdsHere = $eventids.selectedItems
-$hours = $lasthours.text
-$dates = $specificdate.value
-$logs = $logbox.text
-
 
 
 function Get-WMIEventsOnDate
 {
 	param (
-		[string]$ComputerName = $target,
-		[int[]]$EventIDs = $eventIdsHere,
+		[string]$ComputerName,
+		[int[]]$EventIDs,
 		[datetime]$Date
 	)
     write-host "Grabbing date range"
@@ -53,11 +47,14 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
 }
 
 function Get-WMILast24HoursEvents
-{
+{# Get-RemoteEventLogs.ps1
+param (
+
+)
 	param (
-		[string]$ComputerName = $target,
-		[int[]]$EventIDs = $eventIdsHere, # Default: system startup/shutdown
-		[int]$HoursToGet = $hours
+		[string]$ComputerName,
+		[int[]]$EventIDs, # Default: system startup/shutdown
+		[int]$HoursToGet
 	)
 	write-host "grabbing last $hours hours"
 
@@ -65,8 +62,8 @@ try{    # Get the WMI-formatted time string for 24 hours ago
 	# $start = (Get-Date).AddDays(-5)
 $results = Get-WinEvent -computername $target -FilterHashtable @{
     LogName = 'Security'
-    ID = $EventIdsHere
-    Hours = $(get-date).addHours($hours * -1)
+    ID = $EventIDs
+    Hours = $(get-date).addHours($HoursToGet * -1)
 }
 }
 	catch
@@ -75,21 +72,10 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
 	}
 }
 
-$eventIdsHere = $checkedListBox_EventIDs.CheckedItems
 
-
-if($dates){
+if($Date){
 get-wmieventsondates 
 }
-elseif($hours){
+elseif($HoursToGet){
 get-wmilast24hoursevents
-}
-foreach($line in $results){
-
-    
-
-$logbox.appendtext($line)
-    $logbox.appendtext("`n")
-
-
 }
