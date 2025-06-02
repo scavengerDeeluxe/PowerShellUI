@@ -50,7 +50,7 @@ catch{}
 
 Write-Host "Computer: $ComputerName"
 Write-Host "Events: $EventIDs"
-Write-Host "Time: $TimeBranchInput"
+Write-Host "Time: $date"
 
 $output = get-wmieventsondate  @inputvalues
 
