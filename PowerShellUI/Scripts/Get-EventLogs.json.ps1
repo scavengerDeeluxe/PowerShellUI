@@ -40,9 +40,11 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
     ID = $EventIDs
     Hours = $(get-date).addHours($HoursToGet * -1)
 }
+ }
 catch{}
 
 }
+ }
 
 
 
