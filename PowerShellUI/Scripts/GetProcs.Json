@@ -1,0 +1,84 @@
+{
+    "conditions": {
+        "failure": {
+            "exit_code": [
+                1
+            ],
+            "keywords": [
+                "error",
+                "failed"
+            ]
+        },
+        "success": {
+            "exit_code": 0
+        }
+    },
+    "inputs": [
+        {
+            "ControlType": "TextBox",
+            "default": "r32-1991829",
+            "label": "Target Computer",
+            "name": "ComputerName",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "ControlType": "CheckedListBox",
+            "items": [
+                "4624 - Logon Success",
+                "4625 - Logon Failure",
+                "6005 - System Boot",
+                "6006 - System Shutdown",
+                "6008 - Unexpected Shutdown",
+                "1000 - App Error",
+                "1001 - App Hang",
+                "7036 - Service Change",
+                "4104 - PowerShell Script Block"
+            ],
+            "label": "Choose Events To Retrieve",
+            "name": "EventIDs",
+            "type": "Array"
+        },
+{
+  "name": "TimeOption",
+  "label": "Time Range",
+  "ControlType": "ComboBox",
+  "type": "string",
+  "items": [
+    "Last X Hours",
+    "On This Date"
+  ],
+  "branches": {
+    "Last X Hours": {
+      "name": "LastHours",
+      "label": "Enter Hours Back",
+      "ControlType": "TextBox",
+      "type": "integer"
+    },
+    "On This Date": {
+      "name": "SpecificDate",
+      "label": "Pick Date",
+      "ControlType": "DateTimePicker",
+      "type": "Date"
+    }
+  }
+}
+    ],
+    "output": {
+        "format": "DataGrid",
+        "type": "console"
+    },
+    "script": {
+        "description": "Grabs remote computer eventlogs for problem diagnosis",
+        "maker": {
+            "contact": "josh@gmail.com",
+            "name": "josh dahle"
+        },
+        "name": "Get-RemoteEventLogs",
+        "rating": 5,
+        "risk": 0,
+        "runs": 55,
+        "ScriptID": 10001,
+        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-EventLogs.json.ps1"
+    }
+}
