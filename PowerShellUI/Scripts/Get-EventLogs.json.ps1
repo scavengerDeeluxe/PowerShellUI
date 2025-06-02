@@ -5,6 +5,7 @@ $dates = $specificdate.value
 $logs = $logbox.text
 
 
+
 function Get-WMIEventsOnDate
 {
 	param (
@@ -12,7 +13,7 @@ function Get-WMIEventsOnDate
 		[int[]]$EventIDs = $eventIdsHere,
 		[datetime]$Date
 	)
-	
+    write-host "Grabbing date range"
 	# Calculate start and end of the selected day
 	$dayStart = $Date.Date
 	$dayEnd = $dayStart.AddDays(1).AddSeconds(-1)
@@ -22,26 +23,33 @@ function Get-WMIEventsOnDate
 	$endWMI = $dayEnd.ToString("yyyyMMddHHmmss.000000-000")
 	
 	# Build event code filter
-	$eventFilter = ($EventIDs | ForEach-Object { "EventCode = $_" }) -join " OR "
+#	$eventFilter = ($EventIDs | ForEach-Object { "EventCode = $_" }) -join " OR "
 	
 	# Final WMI filter
-	$filter = "LogFile = '$LogName' AND TimeGenerated >= '$startWMI' AND TimeGenerated <= '$endWMI'"
-	if ($EventIDs.Count -gt 0)
-	{
-		$filter += " AND ($eventFilter)"
-	}
-	
-	try
-	{
-	$item = get-winevent -computername $computername -filterhashtable {$eventfilter} 
- #	$item = Get-WmiObject -Class Win32_NTLogEvent -ComputerName $ComputerName -Filter $filter -ErrorAction Stop |
-#		Select-Object TimeGenerated, EventCode, SourceName, Type, Message
-		$results.APpendText($item)
-	}
+$start = $dates
+$end = $dates.adddays(1).addseconds(-1)
+
+    write-host "grabbing events from $start to $end"
+    
+    # Get the WMI-formatted time string for 24 hours ago
+    # $start = (Get-Date).AddDays(-5)
+    
+    # Query WMI for events
+
+try{    # Get the WMI-formatted time string for 24 hours ago
+	# $start = (Get-Date).AddDays(-5)
+$results = Get-WinEvent -computername $target -FilterHashtable @{
+    LogName = 'Security'
+    ID = $EventIdsHere
+    StartTime = $start
+    EndTime = $end
+}
+}
 	catch
 	{
-		Write-Warning "Failed to query $ComputerName"
+		$logbox.appendtext("Failed to query $ComputerName")
 	}
+    $
 }
 
 function Get-WMILast24HoursEvents
@@ -51,45 +59,37 @@ function Get-WMILast24HoursEvents
 		[int[]]$EventIDs = $eventIdsHere, # Default: system startup/shutdown
 		[int]$HoursToGet = $hours
 	)
-	
-	# Get the WMI-formatted time string for 24 hours ago
-	$startTime = (Get-Date).AddHours(-24).ToString("yyyyMMddHHmmss.000000-000")
-	
-	# Build the EventCode filter (e.g., "EventCode = 6005 OR EventCode = 6006")
-	$eventFilter = ($EventIDs | ForEach-Object { "EventCode = $_" }) -join " OR "
-	
-	# Full WMI filter string
-	$filter = "LogFile = '$LogName' AND TimeGenerated >= '$startTime'"
-	if ($eventIDs.Count -gt 0)
-	{
-		$filter += " AND ($eventFilter)"
-	}
-	
-	try
-	{
-		$results = Get-WmiObject -Class Win32_NTLogEvent -ComputerName $ComputerName -Filter $filter -ErrorAction Stop
-		$results | Select-Object TimeGenerated, EventCode, SourceName, Type, Message
-		$output.appendText $results
-	}
+	write-host "grabbing last $hours hours"
+
+try{    # Get the WMI-formatted time string for 24 hours ago
+	# $start = (Get-Date).AddDays(-5)
+$results = Get-WinEvent -computername $target -FilterHashtable @{
+    LogName = 'Security'
+    ID = $EventIdsHere
+    Hours = $(get-date).addHours($hours * -1)
+}
+}
 	catch
 	{
-		Write-Warning "Failed to query $ComputerName"
+		$logbox.appendtext("Failed to query $ComputerName")
 	}
 }
 
 $eventIdsHere = $checkedListBox_EventIDs.CheckedItems
 
-$target = $computername.text
-if ($ComboBox.SelectedItem -eq 'On This Date') { $dates = $selection.text | get-date -Format 'dd/MM/yyyy'
-	Get-WMIEventsOnDate -Date $dates -ComputerName $target -EventIDs $eventIdsHere}
-elseif ($combobox.selectedItem -eq "Last X Hours")
-{
-	Get-WMILast24HoursEvents -HoursToGet $hours.text -ComputerName $target -EventIDs $eventIdsHere
-}
-    
+
 if($dates){
 get-wmieventsondates 
 }
 elseif($hours){
 get-wmilast24hoursevents
+}
+foreach($line in $results){
+
+    
+
+$logbox.appendtext($line)
+    $logbox.appendtext("`n")
+
+
 }
