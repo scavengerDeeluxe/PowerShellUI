@@ -21,7 +21,7 @@ try{
 
 $results = Get-WinEvent -computername $target -FilterHashtable @{
     LogName = 'Security,System,Application'
-    ID = $EventIDs
+    ID = $EventID.ID
     StartTime = $start
     EndTime = $end
 }
@@ -37,7 +37,7 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
 	# $start = (Get-Date).AddDays(-5)
 $results = Get-WinEvent -computername $target -FilterHashtable @{
     LogName = 'Security,System,Application'
-    ID = $EventIDs
+    ID = $EventID.ID
     Hours = $(get-date).addHours($HoursToGet * -1)
 }
  }
