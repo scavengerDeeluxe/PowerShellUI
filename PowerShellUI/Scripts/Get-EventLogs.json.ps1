@@ -1,3 +1,9 @@
+$target = $computername.text
+$EventIdsHere = $eventids.selectedItems
+$hours = $lasthours.text
+$dates = $specificdate.value
+$logs = $logbox.text
+
 
 function Get-WMIEventsOnDate
 {
@@ -81,3 +87,9 @@ elseif ($combobox.selectedItem -eq "Last X Hours")
 	Get-WMILast24HoursEvents -HoursToGet $hours.text -ComputerName $target -EventIDs $eventIdsHere
 }
     
+if($dates){
+get-wmieventsondates 
+}
+elseif($hours){
+get-wmilast24hoursevents
+}
