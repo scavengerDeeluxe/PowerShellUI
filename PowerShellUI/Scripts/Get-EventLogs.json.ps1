@@ -1,85 +1,54 @@
 
 
-function Get-WMIEventsOnDate
+function Get-wmieventsondate
 {
 	param (
 		[string]$ComputerName,
 		[int[]]$EventIDs,
-		[datetime]$Date
+		[datetime]$Date,
+  		[int]$HoursToGet
 	)
-    write-host "Grabbing date range"
-	# Calculate start and end of the selected day
+
+if($date){
 	$dayStart = $Date.Date
 	$dayEnd = $dayStart.AddDays(1).AddSeconds(-1)
 	
 	# Format into WMI time format
 	$startWMI = $dayStart.ToString("yyyyMMddHHmmss.000000-000")
 	$endWMI = $dayEnd.ToString("yyyyMMddHHmmss.000000-000")
-	
-	# Build event code filter
-#	$eventFilter = ($EventIDs | ForEach-Object { "EventCode = $_" }) -join " OR "
-	
-	# Final WMI filter
-$start = $dates
-$end = $dates.adddays(1).addseconds(-1)
+ 
+try{    
 
-    write-host "grabbing events from $start to $end"
-    
-    # Get the WMI-formatted time string for 24 hours ago
-    # $start = (Get-Date).AddDays(-5)
-    
-    # Query WMI for events
-
-try{    # Get the WMI-formatted time string for 24 hours ago
-	# $start = (Get-Date).AddDays(-5)
 $results = Get-WinEvent -computername $target -FilterHashtable @{
-    LogName = 'Security'
-    ID = $EventIdsHere
+    LogName = 'Security,System,Application'
+    ID = $EventIDs
     StartTime = $start
     EndTime = $end
 }
+
 }
 	catch
 	{
 		$richtextbox1.appendtext("Failed to query $ComputerName")
 	}
-    $
-}
-
-function Get-WMILast24HoursEvents
-{# Get-RemoteEventLogs.ps1
-param (
-
-)
-	param (
-		[string]$ComputerName,
-		[int[]]$EventIDs, # Default: system startup/shutdown
-		[int]$HoursToGet
-	)
-	write-host "grabbing last $hours hours"
-
-try{    # Get the WMI-formatted time string for 24 hours ago
+ }
+ elseif($hourstoget){
+ try{    # Get the WMI-formatted time string for 24 hours ago
 	# $start = (Get-Date).AddDays(-5)
 $results = Get-WinEvent -computername $target -FilterHashtable @{
-    LogName = 'Security'
+    LogName = 'Security,System,Application'
     ID = $EventIDs
     Hours = $(get-date).addHours($HoursToGet * -1)
 }
+catch{}
+
 }
-	catch
-	{
-		$richtextbox1.appendtext("Failed to query $ComputerName")
-	}
-}
+
+
+
 Write-Host "Computer: $ComputerName"
 Write-Host "Events: $EventIDs"
 Write-Host "Time: $TimeBranchInput"
 
-if($Date){
-$output = get-wmieventsondates  @inputvalues
-}
-elseif($HoursToGet){
+$output = get-wmieventsondate  @inputvalues
 
-$output = get-wmilast24hoursevents @inputvalues
-
-}
