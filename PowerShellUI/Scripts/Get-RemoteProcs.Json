@@ -37,6 +37,6 @@
         "risk": 0,
         "runs": 22,
         "ScriptID": 10002,
-        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-RemoteProcs.json.ps1"
+        "source_url": "https://raw.githubusercontent.com/scavengerDeeluxe/PowerShellUI/refs/heads/master/PowerShellUI/Scripts/Get-RemoteProcs.Json.Ps1"
     }
 }
