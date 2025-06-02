@@ -41,7 +41,7 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
 }
 	catch
 	{
-		$logbox.appendtext("Failed to query $ComputerName")
+		$richtextbox1.appendtext("Failed to query $ComputerName")
 	}
     $
 }
@@ -68,14 +68,18 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
 }
 	catch
 	{
-		$logbox.appendtext("Failed to query $ComputerName")
+		$richtextbox1.appendtext("Failed to query $ComputerName")
 	}
 }
-
+Write-Host "Computer: $ComputerName"
+Write-Host "Events: $EventIDs"
+Write-Host "Time: $TimeBranchInput"
 
 if($Date){
-get-wmieventsondates 
+$output = get-wmieventsondates  @inputvalues
 }
 elseif($HoursToGet){
-get-wmilast24hoursevents
+
+$output = get-wmilast24hoursevents @inputvalues
+
 }
