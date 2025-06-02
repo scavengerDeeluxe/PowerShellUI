@@ -1,4 +1,4 @@
-$remotepc = $targetpc
+$1 = $targetpc
 
 function Get-RemoteProcs {
 
