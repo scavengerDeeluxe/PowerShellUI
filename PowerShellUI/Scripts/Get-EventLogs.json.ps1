@@ -4,7 +4,7 @@ function Get-wmieventsondate
 {
 	param (
 		[string]$ComputerName,
-		[int[]]$EventIDs,
+		[int[]]$EventIDs.Id,
 		[datetime]$Date,
   		[int]$HoursToGet
 	)
