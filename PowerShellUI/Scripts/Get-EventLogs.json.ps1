@@ -19,7 +19,7 @@ if($date){
  
 try{    
 
-$results = Get-WinEvent -computername $target -FilterHashtable @{
+$results = Get-WinEvent -computername $computername -FilterHashtable @{
     LogName = 'Security,System,Application'
     ID = $EventID.ID
     StartTime = $start
@@ -35,7 +35,7 @@ $results = Get-WinEvent -computername $target -FilterHashtable @{
  elseif($hourstoget){
  try{    # Get the WMI-formatted time string for 24 hours ago
 	# $start = (Get-Date).AddDays(-5)
-$results = Get-WinEvent -computername $target -FilterHashtable @{
+$results = Get-WinEvent -computername $computername -FilterHashtable @{
     LogName = 'Security,System,Application'
     ID = $EventID.ID
     Hours = $(get-date).addHours($HoursToGet * -1)
