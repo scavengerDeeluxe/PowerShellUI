@@ -17,7 +17,7 @@
         {
             "ControlType": "TextBox",
             "label": "Target Computer",
-            "name": "ComputerName",
+            "name": "target",
             "required": true,
             "type": "string"
         }
