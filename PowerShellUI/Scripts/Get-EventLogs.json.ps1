@@ -53,7 +53,8 @@ catch{$logbox.appendtext('Failed to query')}
  }
 
 
-
+write-host $results
+write-host "HourstoGet: $hours"
 Write-Host "Computer: $ComputerName"
 Write-Host "Events: $EventIDs"
 Write-Host "Time: $date"
