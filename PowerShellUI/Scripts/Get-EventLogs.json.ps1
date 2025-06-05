@@ -4,7 +4,7 @@ function Get-wmieventsondate
 		[string]$ComputerName,
 		[array[]]$EventIDs,
 		[datetime]$Date,
-  		[int]$HoursToGet
+  		[int]$TimeBranchInput
 	)
 
 
