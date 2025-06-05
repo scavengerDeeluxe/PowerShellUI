@@ -47,7 +47,7 @@ EndTime = $hours
 	# $start = (Get-Date).AddDays(-5)
 $results = Get-WinEvent -computername $computername -FilterHashtable $queryHashTable
  }
-catch{$logbox.appendtext('Failed to query'}
+catch{$logbox.appendtext('Failed to query')}
 
 }
  }
