@@ -34,8 +34,8 @@ $results = Get-WinEvent -computername $computername -FilterHashtable $queryHashT
 		$logbox.appendtext("Failed to query $ComputerName")
 	}
  }
- elseif($hourstoget){
-     $Hours = $(get-date).addHours($HoursToGet * -1)
+ elseif($TimeBranchInput){
+     $Hours = $(get-date).addHours($TimeBranchInput * -1)
   $queryHashTable = @{
  LogName = 'System','Application'
 ComputerName = $computername
@@ -54,7 +54,7 @@ catch{$logbox.appendtext('Failed to query')}
 
 
 write-host $results
-write-host "HourstoGet: $hours"
+write-host "HourstoGet: $TimeBranchInput"
 Write-Host "Computer: $ComputerName"
 Write-Host "Events: $EventIDs"
 Write-Host "Time: $date"
