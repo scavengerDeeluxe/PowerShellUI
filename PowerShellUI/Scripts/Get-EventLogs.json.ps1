@@ -1,47 +1,53 @@
-
-
 function Get-wmieventsondate
 {
 	param (
 		[string]$ComputerName,
-		[int[]]$EventID,
+		[array[]]$EventIDs,
 		[datetime]$Date,
   		[int]$HoursToGet
 	)
 
+
+
 if($date){
+
 	$dayStart = $Date.Date
 	$dayEnd = $dayStart.AddDays(1).AddSeconds(-1)
 	
 	# Format into WMI time format
 	$startWMI = $dayStart.ToString("yyyyMMddHHmmss.000000-000")
 	$endWMI = $dayEnd.ToString("yyyyMMddHHmmss.000000-000")
- 
+ $queryHashTable = @{
+ LogName = 'System','Application'
+ComputerName = $computername
+Id = $eventIDs
+StartTime = $startWMI
+EndTime = $endWMI
+ }
 try{    
 
-$results = Get-WinEvent -computername $computername -FilterHashtable @{
-    LogName = 'Security,System,Application'
-    ID = $EventID.ID
-    StartTime = $start
-    EndTime = $end
-}
+$results = Get-WinEvent -computername $computername -FilterHashtable $queryHashTable
 
 }
 	catch
 	{
-		$richtextbox1.appendtext("Failed to query $ComputerName")
+		$logbox.appendtext("Failed to query $ComputerName")
 	}
  }
  elseif($hourstoget){
+     $Hours = $(get-date).addHours($HoursToGet * -1)
+  $queryHashTable = @{
+ LogName = 'System','Application'
+ComputerName = $computername
+Id = $eventIDs
+StartTime = $startWMI
+EndTime = $hours
+ }
  try{    # Get the WMI-formatted time string for 24 hours ago
 	# $start = (Get-Date).AddDays(-5)
-$results = Get-WinEvent -computername $computername -FilterHashtable @{
-    LogName = 'Security,System,Application'
-    ID = $EventID.ID
-    Hours = $(get-date).addHours($HoursToGet * -1)
-}
+$results = Get-WinEvent -computername $computername -FilterHashtable $queryHashTable
  }
-catch{}
+catch{$logbox.appendtext('Failed to query'}
 
 }
  }
@@ -53,4 +59,3 @@ Write-Host "Events: $EventIDs"
 Write-Host "Time: $date"
 
 $output = get-wmieventsondate  @inputvalues
-
